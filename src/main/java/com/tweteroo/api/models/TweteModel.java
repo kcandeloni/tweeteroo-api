@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "twetes")
-public class TweterooModel {
+public class TweteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -26,7 +26,7 @@ public class TweterooModel {
     @Column(nullable = false)
     private Long userId;
 
-    public TweterooModel(TweteDTO dto){
+    public TweteModel(TweteDTO dto){
         this.text = dto.getText();
         this.userId = dto.getUserId();
     }

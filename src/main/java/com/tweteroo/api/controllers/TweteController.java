@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tweteroo.api.dtos.TweteDTO;
-import com.tweteroo.api.models.TweterooModel;
+import com.tweteroo.api.models.TweteModel;
 import com.tweteroo.api.services.TweteServise;
 
 import java.util.List;
@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/tweteroo")
-public class TweterooController {
+public class TweteController {
     final TweteServise tweteService;
 
-    TweterooController(TweteServise tweteServise){
+    TweteController(TweteServise tweteServise){
         this.tweteService = tweteServise;
     }
 
     @GetMapping
-    public List<TweterooModel> getTwetes() {
-        List<TweterooModel> twetes = tweteService.findAll();
+    public List<TweteModel> getTwetes() {
+        List<TweteModel> twetes = tweteService.findAll();
         return twetes;
     }
     @PostMapping
