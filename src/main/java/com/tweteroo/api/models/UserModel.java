@@ -22,12 +22,12 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(length = 42, nullable = false)
-    private String name;
+    private String username;
     @Column(length = 280, nullable = false)
     private String avatar;
 
     public UserModel(UserDTO dto){
-        this.name = dto.getName();
+        this.username = dto.getUsername();
         this.avatar = dto.getAvatar();
     }
 }
