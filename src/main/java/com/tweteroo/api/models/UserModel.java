@@ -21,13 +21,13 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(length = 42, nullable = false)
-    private String userName;
+    @Column(length = 42, nullable = false, unique = true)
+    private String username;
     @Column(length = 280, nullable = false)
     private String avatar;
 
     public UserModel(UserDTO dto){
-        this.userName = dto.getUserName();
+        this.username = dto.getUsername();
         this.avatar = dto.getAvatar();
     }
 }
