@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,13 +28,16 @@ public class TweteController {
     }
 
     @GetMapping
-    public List<TweteModel> getTwetes() {
+    public ResponseEntity<List<TweteModel>> getTwetes() {
         List<TweteModel> twetes = tweteService.findAll();
-        return twetes;
+        return ResponseEntity.status(HttpStatus.OK).body(twetes);
     }
     @PostMapping
-    public Optional<TweteModel> setTwete(@RequestBody @Valid TweteDTO body) {
+    public ResponseEntity<Optional<TweteModel>> setTwete(@RequestBody @Valid TweteDTO body) {
         Optional<TweteModel> twete = tweteService.save(body);
-        return twete;
+        if (!twete.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(twete);
     }
 }

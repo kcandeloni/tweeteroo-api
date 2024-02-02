@@ -17,6 +17,9 @@ public class UserServise {
         this.userRepository = userRepository;
     }
     public Optional<UserModel> save(UserDTO dto){
+        if(userRepository.existsByUserName(dto.getUserName())){
+            return Optional.empty();
+        }
         UserModel user = new UserModel(dto);
         return Optional.of(userRepository.save(user));
     }

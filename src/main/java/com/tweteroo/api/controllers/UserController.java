@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,9 +32,12 @@ public class UserController {
         return userService.getUsers();
     }
     @PostMapping
-    public Optional<UserModel> setUser(@RequestBody @Valid UserDTO body) {
+    public ResponseEntity<Optional<UserModel>> setUser(@RequestBody @Valid UserDTO body) {
         Optional<UserModel> user = userService.save(body);
-        return user;
+        if(!user.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
     
 }

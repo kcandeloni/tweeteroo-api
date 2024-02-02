@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class UserDTO {
     @NotBlank
-    private String username;
+    private String userName;
     @NotBlank
     private String avatar;
 }
