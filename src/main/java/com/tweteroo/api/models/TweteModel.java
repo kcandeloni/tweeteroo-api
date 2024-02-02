@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +26,16 @@ public class TweteModel {
     private Long id;
     @Column(length = 280, nullable = false)
     private String text;
-    @Column(nullable = false)
-    private Long userId;
-
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private UserModel user;
     public TweteModel(TweteDTO dto){
         this.text = dto.getText();
-        this.userId = dto.getUserId();
+        this.user = new UserModel();
+        this.user.setId(dto.getUserId());
+    }
+    public TweteModel(TweteDTO dto, UserModel user){
+        this.text = dto.getText();
+        this.user = user;
     }
 }

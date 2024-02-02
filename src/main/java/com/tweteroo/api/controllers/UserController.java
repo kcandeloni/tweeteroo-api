@@ -9,6 +9,7 @@ import com.tweteroo.api.services.UserServise;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @GetMapping
-    public String getUsers() {
-        return "OK";
+    public List getUsers() {
+        return userService.getUsers();
     }
     @PostMapping
     public Optional<UserModel> setUser(@RequestBody @Valid UserDTO body) {

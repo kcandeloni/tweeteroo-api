@@ -1,5 +1,7 @@
 package com.tweteroo.api.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -17,5 +19,10 @@ public class UserServise {
     public Optional<UserModel> save(UserDTO dto){
         UserModel user = new UserModel(dto);
         return Optional.of(userRepository.save(user));
+    }
+    public List<UserModel> getUsers(){
+        List users = new ArrayList<>();
+        users = userRepository.findAll();
+        return users;
     }
 }
